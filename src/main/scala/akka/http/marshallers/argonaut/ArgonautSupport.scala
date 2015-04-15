@@ -17,7 +17,7 @@ trait ArgonautSupport {
     argonautUnmarshaller(e, ec, mat)
 
   implicit def argonautUnmarshaller[T](implicit e: DecodeJson[T], ec: ExecutionContext, mat: FlowMaterializer): FromEntityUnmarshaller[T] =
-    argonautJsonUnmarshaller.map(e.decodeJson(_).toDisjunction)
+    argonautJsonUnmarshaller.map(e.decodeJson(_))
 
   implicit def argonautJsonUnmarshaller(implicit ec: ExecutionContext, mat: FlowMaterializer): FromEntityUnmarshaller[Json] =
     Unmarshaller.byteStringUnmarshaller.forContentTypes(`application/json`).mapWithCharset { (data, charset) ⇒
@@ -36,9 +36,14 @@ trait ArgonautSupport {
   implicit def argonautJsonMarshaller[T](implicit e: EncodeJson[T], ec: ExecutionContext, p: Pretty = prettifier): ToEntityMarshaller[Json] =
     Marshaller.StringMarshaller.wrap(ContentTypes.`application/json`)(p)
 
-  private implicit def disjunctionToException[E, T](d: \/[E, T]): T = d match {
-    case -\/(e) => throw new IllegalArgumentException("Invalid value")
-    case \/-(t) => t
+  private implicit def collapseDecodeResult[T](d: DecodeResult[T]): T = d.result match {
+    case -\/((msg, _)) => throw new IllegalArgumentException(msg)
+    case \/-(t)        => t
+  }
+
+  private implicit def collapseDisjunction[T](d: String \/ T): T = d match {
+    case -\/(msg) => throw new IllegalArgumentException(msg)
+    case \/-(t)   => t
   }
 
   type Pretty = Json => String
