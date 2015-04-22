@@ -1,6 +1,6 @@
 name := "akka-argonaut"
 
-scalaVersion in ThisBuild := "2.11.5"
+scalaVersion in ThisBuild := "2.11.6"
 
 scalacOptions in ThisBuild := Seq(
   "-encoding", "UTF-8",
@@ -14,7 +14,7 @@ scalacOptions in ThisBuild := Seq(
 libraryDependencies ++= {
   val akkaV       = "2.3.9"
   val akkaStreamV = "1.0-M5"
-  val argonautV   = "6.1-M5"
+  val argonautV   = "6.1-M6"
   val scalaTestV  = "2.2.1"
   Seq(
     "com.typesafe.akka" %% "akka-actor"                        % akkaV,
