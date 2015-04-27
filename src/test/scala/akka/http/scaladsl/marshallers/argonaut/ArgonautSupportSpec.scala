@@ -1,13 +1,13 @@
-package akka.http.marshallers.argonaut
+package akka.http.scaladsl.marshallers.argonaut
 
 import argonaut._, Argonaut._
 import akka.actor.ActorSystem
 import akka.stream.ActorFlowMaterializer
-import akka.http.model.{ ContentTypes, HttpEntity, HttpRequest }
-import akka.http.model.HttpCharsets.`UTF-8`
-import akka.http.model.MediaTypes.`application/json`
-import akka.http.marshalling.ToResponseMarshallable
-import akka.http.unmarshalling.FromEntityUnmarshaller
+import akka.http.scaladsl.model.{ ContentTypes, HttpEntity, HttpRequest }
+import akka.http.scaladsl.model.HttpCharsets.`UTF-8`
+import akka.http.scaladsl.model.MediaTypes.`application/json`
+import akka.http.scaladsl.marshalling.ToResponseMarshallable
+import akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller
 
 import org.scalatest.{ FunSpec, BeforeAndAfterAll, ShouldMatchers }
 import org.scalatest.concurrent.ScalaFutures

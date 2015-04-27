@@ -1,11 +1,11 @@
-package akka.http.marshallers.argonaut
+package akka.http.scaladsl.marshallers.argonaut
 
 import scalaz._
 import argonaut._, Argonaut._
-import akka.http.model.{ ContentTypes, HttpCharsets }
-import akka.http.model.MediaTypes.`application/json`
-import akka.http.marshalling.{ ToEntityMarshaller, Marshaller }
-import akka.http.unmarshalling.{ FromEntityUnmarshaller, Unmarshaller }
+import akka.http.scaladsl.model.{ ContentTypes, HttpCharsets }
+import akka.http.scaladsl.model.MediaTypes.`application/json`
+import akka.http.scaladsl.marshalling.{ ToEntityMarshaller, Marshaller }
+import akka.http.scaladsl.unmarshalling.{ FromEntityUnmarshaller, Unmarshaller }
 import akka.stream.FlowMaterializer
 
 import scala.concurrent.ExecutionContext
