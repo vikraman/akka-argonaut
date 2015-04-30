@@ -13,7 +13,7 @@ scalacOptions in ThisBuild := Seq(
 
 libraryDependencies ++= {
   val akkaV       = "2.3.10"
-  val akkaStreamV = "1.0-RC1"
+  val akkaStreamV = "1.0-RC2"
   val argonautV   = "6.1-M6"
   val scalaTestV  = "2.2.1"
   Seq(
