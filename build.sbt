@@ -1,4 +1,9 @@
 name := "akka-argonaut"
+version := "0.1.0"
+organization := "org.vikraman"
+description := "Argonaut json marshalling for akka streams"
+homepage := Some(url(s"https://github.com/vikraman/${name.value}"))
+licenses += "MIT" -> url(s"https://github.com/vikraman/${name.value}/blob/${version.value}/LICENSE")
 
 scalaVersion in ThisBuild := "2.11.6"
 
@@ -26,3 +31,6 @@ libraryDependencies ++= {
     "org.scalatest"     %% "scalatest"                            % scalaTestV % "test"
   )
 }
+
+bintraySettings
+useGpg := true
