@@ -1,5 +1,5 @@
 name := "akka-argonaut"
-version := "0.1.0"
+version := "0.2.0"
 organization := "org.vikraman"
 description := "Argonaut json marshalling for akka streams"
 homepage := Some(url(s"https://github.com/vikraman/${name.value}"))
