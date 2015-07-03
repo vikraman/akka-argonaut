@@ -2,7 +2,7 @@ package akka.http.scaladsl.marshallers.argonaut
 
 import argonaut._, Argonaut._
 import akka.actor.ActorSystem
-import akka.stream.ActorFlowMaterializer
+import akka.stream.ActorMaterializer
 import akka.http.scaladsl.model.{ ContentTypes, HttpEntity, HttpRequest }
 import akka.http.scaladsl.model.HttpCharsets.`UTF-8`
 import akka.http.scaladsl.model.MediaTypes.`application/json`
@@ -31,7 +31,7 @@ class ArgonautSupportSpec
 
   val system = ActorSystem("akka-argonaut")
   implicit val ec = system.dispatcher
-  implicit val mat = ActorFlowMaterializer()(system)
+  implicit val mat = ActorMaterializer()(system)
 
   describe("when marshalling a http request") {
 

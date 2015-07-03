@@ -6,20 +6,20 @@ import akka.http.scaladsl.model.{ ContentTypes, HttpCharsets }
 import akka.http.scaladsl.model.MediaTypes.`application/json`
 import akka.http.scaladsl.marshalling.{ ToEntityMarshaller, Marshaller }
 import akka.http.scaladsl.unmarshalling.{ FromEntityUnmarshaller, Unmarshaller }
-import akka.stream.FlowMaterializer
+import akka.stream.Materializer
 
 import scala.concurrent.ExecutionContext
 import scala.language.implicitConversions
 
 trait ArgonautSupport {
 
-  implicit def argonautUnmarshallerConverter[T](e: DecodeJson[T])(implicit ec: ExecutionContext, mat: FlowMaterializer): FromEntityUnmarshaller[T] =
+  implicit def argonautUnmarshallerConverter[T](e: DecodeJson[T])(implicit ec: ExecutionContext, mat: Materializer): FromEntityUnmarshaller[T] =
     argonautUnmarshaller(e, ec, mat)
 
-  implicit def argonautUnmarshaller[T](implicit e: DecodeJson[T], ec: ExecutionContext, mat: FlowMaterializer): FromEntityUnmarshaller[T] =
+  implicit def argonautUnmarshaller[T](implicit e: DecodeJson[T], ec: ExecutionContext, mat: Materializer): FromEntityUnmarshaller[T] =
     argonautJsonUnmarshaller.map(e.decodeJson(_))
 
-  implicit def argonautJsonUnmarshaller(implicit ec: ExecutionContext, mat: FlowMaterializer): FromEntityUnmarshaller[Json] =
+  implicit def argonautJsonUnmarshaller(implicit ec: ExecutionContext, mat: Materializer): FromEntityUnmarshaller[Json] =
     Unmarshaller.byteStringUnmarshaller.forContentTypes(`application/json`).mapWithCharset { (data, charset) ⇒
       val input =
         if (charset == HttpCharsets.`UTF-8`) data.utf8String
