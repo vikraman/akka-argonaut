@@ -5,7 +5,7 @@ description := "Argonaut json marshalling for akka streams"
 homepage := Some(url(s"https://github.com/vikraman/${name.value}"))
 licenses += "MIT" -> url(s"https://github.com/vikraman/${name.value}/blob/${version.value}/LICENSE")
 
-scalaVersion in ThisBuild := "2.11.6"
+scalaVersion in ThisBuild := "2.11.7"
 
 scalacOptions in ThisBuild := Seq(
   "-encoding", "UTF-8",
@@ -17,9 +17,9 @@ scalacOptions in ThisBuild := Seq(
 )
 
 libraryDependencies ++= {
-  val akkaV       = "2.3.11"
-  val akkaStreamV = "1.0-RC4"
-  val argonautV   = "6.1-M6"
+  val akkaV       = "2.3.12"
+  val akkaStreamV = "1.0"
+  val argonautV   = "6.1"
   val scalaTestV  = "2.2.1"
   Seq(
     "com.typesafe.akka" %% "akka-actor"                      % akkaV,
