@@ -35,5 +35,4 @@ libraryDependencies ++= {
   )
 }
 
-bintraySettings
 useGpg := true
