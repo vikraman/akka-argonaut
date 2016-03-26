@@ -4,7 +4,6 @@ import argonaut._, Argonaut._
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import akka.http.scaladsl.model.{ ContentTypes, HttpEntity, HttpRequest }
-import akka.http.scaladsl.model.HttpCharsets.`UTF-8`
 import akka.http.scaladsl.model.MediaTypes.`application/json`
 import akka.http.scaladsl.marshalling.ToResponseMarshallable
 import akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller
