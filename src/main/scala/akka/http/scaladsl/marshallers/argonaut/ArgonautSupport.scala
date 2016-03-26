@@ -2,7 +2,7 @@ package akka.http.scaladsl.marshallers.argonaut
 
 import scalaz._
 import argonaut._, Argonaut._
-import akka.http.scaladsl.model.{ ContentTypes, HttpCharsets }
+import akka.http.scaladsl.model.{ HttpCharsets, MediaTypes }
 import akka.http.scaladsl.model.MediaTypes.`application/json`
 import akka.http.scaladsl.marshalling.{ ToEntityMarshaller, Marshaller }
 import akka.http.scaladsl.unmarshalling.{ FromEntityUnmarshaller, Unmarshaller }
@@ -34,7 +34,7 @@ trait ArgonautSupport {
     argonautJsonMarshaller[T].compose(e.encode)
 
   implicit def argonautJsonMarshaller[T](implicit e: EncodeJson[T], ec: ExecutionContext, p: Pretty = prettifier): ToEntityMarshaller[Json] =
-    Marshaller.StringMarshaller.wrap(ContentTypes.`application/json`)(p)
+    Marshaller.StringMarshaller.wrap(MediaTypes.`application/json`)(p)
 
   private implicit def collapseDecodeResult[T](d: DecodeResult[T]): T = d.result match {
     case -\/((msg, _)) => throw new IllegalArgumentException(msg)

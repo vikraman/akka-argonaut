@@ -41,12 +41,8 @@ class ArgonautSupportSpec
 
       val entity = request.entity
 
-      it("should have correct media-type") {
+      it("should have the correct media-type") {
         entity.contentType.mediaType shouldBe `application/json`
-      }
-
-      it("should have correct charset") {
-        entity.contentType.charset shouldBe `UTF-8`
       }
 
       it("should have correct body") {
@@ -79,6 +75,6 @@ class ArgonautSupportSpec
 
   override protected def afterAll(): Unit = {
     super.afterAll()
-    system.shutdown()
+    system.terminate()
   }
 }
