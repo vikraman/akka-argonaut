@@ -1,6 +1,5 @@
 package akka.http.scaladsl.marshallers.argonaut
 
-import scalaz._
 import argonaut._, Argonaut._
 import akka.http.scaladsl.model.{ HttpCharsets, MediaTypes }
 import akka.http.scaladsl.model.MediaTypes.`application/json`
@@ -29,13 +28,13 @@ trait ArgonautSupport {
     Marshaller.StringMarshaller.wrap(MediaTypes.`application/json`)(p)
 
   private implicit def collapseDecodeResult[T](d: DecodeResult[T]): T = d.result match {
-    case -\/((msg, _)) => throw new IllegalArgumentException(msg)
-    case \/-(t)        => t
+    case Left((msg, _)) => throw new IllegalArgumentException(msg)
+    case Right(t)       => t
   }
 
-  private implicit def collapseDisjunction[T](d: String \/ T): T = d match {
-    case -\/(msg) => throw new IllegalArgumentException(msg)
-    case \/-(t)   => t
+  private implicit def collapseEither[T](d: Either[String, T]): T = d match {
+    case Left(msg) => throw new IllegalArgumentException(msg)
+    case Right(t)  => t
   }
 
   type Pretty = Json => String

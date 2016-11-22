@@ -8,7 +8,7 @@ import akka.http.scaladsl.model.MediaTypes.`application/json`
 import akka.http.scaladsl.marshalling.ToResponseMarshallable
 import akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller
 
-import org.scalatest.{ FunSpec, BeforeAndAfterAll, ShouldMatchers }
+import org.scalatest._
 import org.scalatest.concurrent.ScalaFutures
 
 case class Person(name: String, age: Int)
@@ -26,7 +26,7 @@ object Person {
 
 class ArgonautSupportSpec
     extends FunSpec with BeforeAndAfterAll with ArgonautSupport
-    with ShouldMatchers with ScalaFutures {
+    with Matchers with ScalaFutures {
 
   val system = ActorSystem("akka-argonaut")
   implicit val ec = system.dispatcher

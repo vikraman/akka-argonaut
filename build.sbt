@@ -22,14 +22,15 @@ scalacOptions in ThisBuild := Seq(
 fork := true
 
 libraryDependencies ++= {
-  val akkaV       = "2.4.2"
-  val argonautV   = "6.1"
-  val scalaTestV  = "2.2.6"
+  val akkaV       = "2.4.13"
+  val akkaHttpV   = "10.0.0-RC2"
+  val argonautV   = "6.2-RC2"
+  val scalaTestV  = "3.0.1"
   Seq(
     "com.typesafe.akka" %% "akka-actor"              % akkaV,
     "com.typesafe.akka" %% "akka-stream"             % akkaV,
-    "com.typesafe.akka" %% "akka-http-experimental"  % akkaV,
-    "com.typesafe.akka" %% "akka-http-testkit"       % akkaV % Test,
+    "com.typesafe.akka" %% "akka-http"               % akkaHttpV,
+    "com.typesafe.akka" %% "akka-http-testkit"       % akkaHttpV % Test,
     "io.argonaut"       %% "argonaut"                % argonautV,
     "org.scalatest"     %% "scalatest"               % scalaTestV % Test
   )
