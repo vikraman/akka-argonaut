@@ -8,7 +8,7 @@ homepage := Some(url(s"https://github.com/vikraman/${name.value}"))
 
 licenses += "MIT" -> url(s"https://github.com/vikraman/${name.value}/blob/${version.value}/LICENSE")
 
-scalaVersion in ThisBuild := "2.11.8"
+scalaVersion in ThisBuild := "2.12.0"
 
 scalacOptions in ThisBuild := Seq(
   "-encoding", "UTF-8",
@@ -20,6 +20,8 @@ scalacOptions in ThisBuild := Seq(
 )
 
 fork := true
+
+crossScalaVersions := Seq("2.11.8", "2.12.0")
 
 libraryDependencies ++= {
   val akkaV       = "2.4.13"
