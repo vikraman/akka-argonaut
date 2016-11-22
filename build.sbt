@@ -15,8 +15,7 @@ scalacOptions in ThisBuild := Seq(
   "-deprecation",
   "-unchecked",
   "-feature",
-  "-Xlint",
-  "-optimise"
+  "-Xlint"
 )
 
 fork := true
