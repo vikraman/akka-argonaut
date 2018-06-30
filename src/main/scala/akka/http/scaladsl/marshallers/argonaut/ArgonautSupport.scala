@@ -28,8 +28,8 @@ trait ArgonautSupport {
     Marshaller.StringMarshaller.wrap(MediaTypes.`application/json`)(p)
 
   private implicit def collapseDecodeResult[T](d: DecodeResult[T]): T = d.result match {
-    case Left((msg, _)) => throw new IllegalArgumentException(msg)
-    case Right(t)       => t
+    case Left((msg, cursor)) => throw new IllegalArgumentException(s"$msg - $cursor")
+    case Right(t)            => t
   }
 
   private implicit def collapseEither[T](d: Either[String, T]): T = d match {
