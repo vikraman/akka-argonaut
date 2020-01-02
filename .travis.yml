@@ -13,8 +13,9 @@ jdk:
   - openjdk8
   - openjdk11
 
+
 script:
-  - sbt clean coverage test
+  - sbt ++$TRAVIS_SCALA_VERSION clean coverage test
 
 after_success:
   - sbt coverageReport coveralls
