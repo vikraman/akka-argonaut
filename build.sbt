@@ -23,7 +23,7 @@ scalacOptions in ThisBuild := Seq(
 
 fork := true
 
-crossScalaVersions := Seq("2.11.12", "2.12.10", "2.13.1")
+crossScalaVersions := Seq("2.12.10", "2.13.1")
 
 libraryDependencies ++= {
   val akkaV = "2.6.1"
