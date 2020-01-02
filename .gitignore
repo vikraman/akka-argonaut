@@ -19,3 +19,7 @@ project/plugins/project/
 # ensime
 .ensime*
 *~
+
+# bloop and metals
+.bloop/
+.metals/

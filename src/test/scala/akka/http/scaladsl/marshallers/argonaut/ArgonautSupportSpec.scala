@@ -2,13 +2,12 @@ package akka.http.scaladsl.marshallers.argonaut
 
 import argonaut._, Argonaut._
 import akka.actor.ActorSystem
-import akka.stream.ActorMaterializer
-import akka.http.scaladsl.model.{ ContentTypes, HttpEntity, HttpRequest }
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpRequest}
 import akka.http.scaladsl.model.MediaTypes.`application/json`
 import akka.http.scaladsl.marshalling.ToResponseMarshallable
 import akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller
 
-import org.scalatest._
+import org.scalatest._, funspec._, matchers.should._
 import org.scalatest.concurrent.ScalaFutures
 
 case class Person(name: String, age: Int)
@@ -25,19 +24,20 @@ object Person {
 }
 
 class ArgonautSupportSpec
-    extends FunSpec with BeforeAndAfterAll with ArgonautSupport
-    with Matchers with ScalaFutures {
+    extends AnyFunSpec
+    with BeforeAndAfterAll
+    with ArgonautSupport
+    with Matchers
+    with ScalaFutures {
 
-  val system = ActorSystem("akka-argonaut")
+  implicit val system = ActorSystem("akka-argonaut")
   implicit val ec = system.dispatcher
-  implicit val mat = ActorMaterializer()(system)
 
   describe("when marshalling a http request") {
 
     val marshallable: ToResponseMarshallable = Person.person
 
     whenReady(marshallable(HttpRequest())) { request =>
-
       val entity = request.entity
 
       it("should have the correct media-type") {
@@ -45,8 +45,11 @@ class ArgonautSupportSpec
       }
 
       it("should have correct body") {
-        whenReady(request.entity.dataBytes
-          .map(_.utf8String).runFold("")(_ + _)) {
+        whenReady(
+          request.entity.dataBytes
+            .map(_.utf8String)
+            .runFold("")(_ + _)
+        ) {
           _ shouldBe Person.goodJson
         }
       }
@@ -58,14 +61,16 @@ class ArgonautSupportSpec
     val unmarshaller = implicitly[FromEntityUnmarshaller[Person]]
 
     it("should successfully unmarshal a valid entity") {
-      val goodEntity = HttpEntity(ContentTypes.`application/json`, Person.goodJson)
+      val goodEntity =
+        HttpEntity(ContentTypes.`application/json`, Person.goodJson)
       whenReady(unmarshaller(goodEntity)) {
         _ shouldBe Person.person
       }
     }
 
     it("should fail to unmarshal an invalid entity") {
-      val badEntity = HttpEntity(ContentTypes.`application/json`, Person.badJson)
+      val badEntity =
+        HttpEntity(ContentTypes.`application/json`, Person.badJson)
       whenReady(unmarshaller(badEntity).failed) {
         _ shouldBe a[IllegalArgumentException]
       }
