@@ -7,10 +7,12 @@ cache:
 language: scala
 
 scala:
-  - 2.12.0
-  - 2.11.8
+  - 2.13.1
+  - 2.12.10
+  - 2.11.12
 jdk:
-  - oraclejdk8
+  - openjdk8
+  - openjdk11
 
 script:
   - sbt clean coverage test
